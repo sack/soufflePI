@@ -1,0 +1,3 @@
+ -Xms64m -Xmx1024m
+soufflePI
+soufflePI.jar,core.jar,gifAnimation.jar
