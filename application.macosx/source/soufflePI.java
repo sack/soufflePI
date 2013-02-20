@@ -28,16 +28,17 @@ public class soufflePI extends PApplet {
 
 
 PImage[] animation;
-Gif loopingGif;
+Gif loopingGif1,loopingGif2,loopingGif3;
 Gif nonLoopingGif;
 boolean pause = false;
 
-int flagFrame = 0;
+int flagFrame1 = 0;
+int flagFrame2 = 0;
+int flagFrame3 = 0;
 int i=0;
 int curFileIndex=0;
 
 String[] files;
-
 public void setup() {
 
 
@@ -50,9 +51,17 @@ public void setup() {
   //  loopingGif = new Gif(this, files[int(random(files.length))]);
   nextImage();
   i++;
-  loopingGif.play();
-
-
+   loopingGif1 = new Gif(this,"respire-plante.gif" );
+  loopingGif2 = new Gif(this,"respire-animal.gif" );
+  loopingGif3 = new Gif(this,"vie.gif" );
+  
+  loopingGif1.loop();
+  loopingGif2.loop();
+  loopingGif3.loop();
+  
+  loopingGif1.play();
+loopingGif2.play();
+loopingGif3.play();
 
   background(0);
 }
@@ -63,18 +72,17 @@ public void draw() {
   fill (0); 
 
   //stroke(188, 178, 146); 
-  if (flagFrame > loopingGif.currentFrame()) {
-    flagFrame=0;
-    //nextImage();
-  }
-  else {
-    flagFrame = loopingGif.currentFrame();
-  }
+
+
 
   //println(loopingGif.currentFrame());
   //loopingGif.resize(width, height);
-  image(loopingGif, 0, 0, width, height);
-
+  if (curFileIndex == 0)
+    image(loopingGif1, 0, 0, width, height);
+  if (curFileIndex == 1)
+    image(loopingGif2, 0, 0, width, height);
+  if (curFileIndex == 2)
+    image(loopingGif3, 0, 0, width, height);
 
 }
 
@@ -89,21 +97,10 @@ public void keyPressed() {
 
 
 public void nextImage() {
-  //    if (curFileIndex == files.length){
-  //     curFileIndex=0;
-  //    }
-  //    println(files[curFileIndex]);
-  //    loopingGif = new Gif(this, files[curFileIndex]);
-  //     curFileIndex++;
-
-  String fileName = files[PApplet.parseInt(random(files.length))];
-  println(fileName);
-  //loopingGif.stop();
-  if (loopingGif != null) loopingGif.dispose();
-  loopingGif = new Gif(this, fileName);
-  ;
-  //loopingGif = new Gif(this, fileName);
-  loopingGif.loop();
+  curFileIndex++;  
+ if (curFileIndex>2){
+    curFileIndex=0;
+ }
 
   i++;
   println(i);
